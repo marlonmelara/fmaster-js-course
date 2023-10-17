@@ -35,3 +35,11 @@ const obtenerIndice = (nombre) => {
 
 // Llamada a la función obtenerIndice con "Snoppy" como argumento
 obtenerIndice("lufy");
+
+/* .forEach()
+ * - Nos permite ejecutar una funcion por cada elemento
+ */
+
+nombres.forEach((nombre, index) => {
+  console.log(`Hola ${nombre} (${index})`);
+});
