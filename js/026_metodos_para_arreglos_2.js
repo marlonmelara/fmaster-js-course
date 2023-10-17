@@ -23,12 +23,15 @@ console.log(`Su número de indice es ${nombres.indexOf("Snoppy")}`);
  * - Obtenemos el último index de un elemento
  */
 
+const obtenerIndice = (nombre) => {
+  const indice = nombres.lastIndexOf(nombre);
+  // Si el índice es -1, significa que el nombre no se encontró en el array
+  if (indice !== -1) {
+    console.log(`El número de índice de ${nombre} es ${indice}`);
+  } else {
+    console.log(`${nombre} no se encontró en el array.`);
+  }
+};
 
-
-const nombreIndice = (nombre) => {
-  nombres.lastIndexOf(nombre);
-}
-  
-  nombreIndice("Snoppy")
-  
-console.log(`Su número de indice de ${nombreIndice} es ${nombres.lastIndexOf("Snoppy")}`);
+// Llamada a la función obtenerIndice con "Snoppy" como argumento
+obtenerIndice("lufy");
