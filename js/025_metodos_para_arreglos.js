@@ -56,3 +56,64 @@ console.log(colores);
 
 colores.pop("amarillo");
 console.log(colores);
+
+/* .shift()
+ * - Elimina el primer elemento de un arreglo y recorre los elementos.
+ */
+
+const dias = [
+  "lunes",
+  "martes",
+  "miércoles",
+  "jueves",
+  "viernes",
+  "sábado",
+  "domingo",
+];
+
+console.log(dias);
+console.log(dias[0]);
+const diaEliminado = dias.shift();
+console.log(diaEliminado);
+console.log(dias[0]);
+
+/* .unshift()
+ * - Agrega un elemento al inicio de un arreglo y empujo los elementos.
+ */
+
+dias.unshift("sin asignar");
+console.log(dias);
+
+/* .splice()
+ * - Nos permite insertar elementos a un arreglo donde le especifiquemos.
+ * - 1er parámetro - Posición donde queremos comenzar a insertar los elementos.
+ * - 2do parámetro - Si queremos eliminar elementos del arreglo desde la posición indicada.
+ * - Resto de parámetros - Los elementos a insertar.
+ */
+
+const amigos = [
+  "Charlie",
+  "Snoppy",
+  "Lucy",
+  "Woodstock",
+  "Sally",
+  "Linus",
+  "Patty",
+  "Marcie",
+  "Lufy",
+  "Goku",
+];
+
+console.log(amigos);
+amigos.splice(8, 2, "Schroeder", "Franklin");
+console.log(amigos);
+
+/* .slice()
+ * - Nos permite copiar una parte de un arreglo a otro.
+ * - 1er parámetro - Posición desde donde queremos copiar.
+ * - 2do parámetro - Hasta antes de que elemento copiar.
+ */
+
+const frutas = ["fresa", "manzana", "uva", "piña", "mango", "naranja", "melon"];
+const frutasFavoritas = frutas.slice(1, 6);
+console.log(frutasFavoritas);
