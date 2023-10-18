@@ -84,3 +84,13 @@ obtenerNombreIndice("L");
 //     );
 //   }
 // };
+
+/* 📌.map()
+ * - Nos permite ejecutar una función por cada elemento y crear un nuevo arreglo en base a los resultados de esa función
+ */
+
+const nombresMayusculas = nombres.map((nombre) => {
+  return nombre.toUpperCase();
+});
+
+console.log(nombresMayusculas);
