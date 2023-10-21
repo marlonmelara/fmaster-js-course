@@ -40,3 +40,12 @@ const lastIndex = texto.lastIndexOf("o");
 // El +1 es necesario porque el segundo parámetro del método .slice() no se incluye en el resultado.
 // Así que al agregar +1, estamos incluyendo la letra 'o' en la nueva cadena.
 console.log(texto.slice(index, lastIndex + 1)); // salida: "mundo"
+
+/*
+ * Alternativa usando índices negativos:
+ * - .slice() también acepta índices negativos, que cuentan desde el final de la cadena hacia atrás.
+ * - Un índice negativo -1 representa el último carácter de la cadena, -2 el penúltimo, y así sucesivamente.
+ * - Por lo tanto, .slice(-6, -1) también cortará la cadena desde el índice de 'm' hasta el índice de 'o'.
+ * - Nota: Al igual que antes, -1 no se incluye en el resultado, por lo que se corta hasta 'o' (índice -2).
+ */
+console.log(texto.slice(-6, -1)); // salida: "mundo"
