@@ -17,11 +17,24 @@ console.log(texto.indexOf("m"));
 console.log(texto.lastIndexOf("o"));
 
 console.log("**** Método .slice() ****");
+
 /*
  * 📌 .slice()
- * - Devuelve un fragmento de una cadena de texto.
- * - 1er parámetro - index desde donde queremos cortar
- * - 2do parámetro (opcional) - index hasta donde queremos cortar
+ * - El método .slice() es usado para extraer una sección de una cadena de texto sin modificar la cadena original.
+ * - Devuelve una nueva cadena de texto que contiene los caracteres de la cadena original desde el índice proporcionado
+ *   en el primer parámetro hasta el índice proporcionado en el segundo parámetro (no incluido).
+ * - 1er parámetro (obligatorio): El índice desde donde queremos empezar a cortar.
+ * - 2do parámetro (opcional): El índice hasta donde queremos cortar (este índice no se incluye en el resultado).
+ *   Si se omite este parámetro, se extraerá hasta el final de la cadena.
  */
 
-console.log(texto.slice(6));
+// Encuentra el índice de la letra 'm' en la cadena 'texto'
+const index = texto.indexOf("m");
+
+// Encuentra el último índice de la letra 'o' en la cadena 'texto'
+const lastIndex = texto.lastIndexOf("o");
+
+// Usa .slice() para cortar la cadena desde el índice de 'm' hasta el índice de 'o' + 1
+// El +1 es necesario porque el segundo parámetro del método .slice() no se incluye en el resultado.
+// Así que al agregar +1, estamos incluyendo la letra 'o' en la nueva cadena.
+console.log(texto.slice(index, lastIndex + 1)); // salida: "mundo"
