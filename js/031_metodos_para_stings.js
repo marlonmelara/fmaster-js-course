@@ -9,12 +9,14 @@ console.log(texto.length);
 
 console.log("**** Método .indexOf() .lastIndexOf() ****");
 /*
- * 📌 .indexOf() .lastIndexOf()
- * - Devuelve el index del primer/último caracter especificado.
+ * 📌 .slice(start, end)
+ * - Extrae una sección de una cadena y devuelve una nueva cadena sin modificar la cadena original.
+ * - 'start': El índice base cero en el que comienza la extracción.
+ * - 'end': (Opcional) El índice base cero antes del cual terminar la extracción.
  */
 
-console.log(texto.indexOf("m"));
-console.log(texto.lastIndexOf("o"));
+const resultado = texto.slice(1, 5);
+console.log(resultado); // Output: Hola
 
 console.log("**** Método .slice() ****");
 
