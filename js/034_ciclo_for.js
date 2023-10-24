@@ -63,6 +63,7 @@ const nombres = [
   123,
 ];
 
+// Este bucle 'for' recorrerá todos los elementos del array 'nombres', desde el índice 0 hasta el último índice.
 for (
   /* Expresión 1: Inicializa la variable 'i' con el valor de 0 */
   let i = 0;
@@ -71,9 +72,34 @@ for (
   /* Expresión 3: Incrementa el valor de 'i' en 1 después de cada iteración */
   i++
 ) {
-  /* Bloque de código que se ejecutará: Imprime el elemento actual del array 'nombres' en la consola */
-  console.log(nombres[i]);
+  /* Bloque de código que se ejecutará: Imprime el mensaje 'Hola' seguido del elemento actual del array 'nombres' en la consola */
+  console.log(`Hola ${nombres[i]}`);
 }
+
+// Ejemplo 5: Si usamos una función
+
+// Definimos una función 'saludarAmigos' que recibe un parámetro 'nombres' y imprime un saludo en la consola.
+let saludarAmigos = (nombres) => {
+  console.log(`Hola ${nombres}`);
+};
+
+// Este bucle 'for' también recorrerá todos los elementos del array 'nombres', desde el índice 0 hasta el último índice.
+for (
+  /* Expresión 1: Inicializa la variable 'i' con el valor de 0 */
+  let i = 0;
+  /* Expresión 2: Verifica si 'i' es menor que la longitud del array 'nombres', si es verdadero, ejecuta el bloque de código */
+  i < nombres.length;
+  /* Expresión 3: Incrementa el valor de 'i' en 1 después de cada iteración */
+  i++
+) {
+  /* Bloque de código que se ejecutará: Llama a la función 'saludarAmigos' con el elemento actual del array 'nombres' como argumento */
+  saludarAmigos(nombres[i]);
+}
+
+/*
+ * En estos ejemplos 4 y 5, se demuestra cómo recorrer un array usando un bucle 'for' y cómo podemos usar una función dentro del bucle
+ * para realizar una operación con cada elemento del array.
+ */
 
 /**
  * La estructura 'for' es muy útil para ejecutar código repetitivamente bajo una condición específica,
