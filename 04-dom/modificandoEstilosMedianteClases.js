@@ -22,5 +22,10 @@ const comprobarClase = () => {
   } else {
     // Si no la tiene, imprime otro mensaje en consola.
     console.log("La caja no tiene la clase activa");
+
+    console.log("Y contiene las siguiente clases:");
+    primeraCaja.classList.forEach((clase) => {
+      console.log(clase);
+    });
   }
 };
