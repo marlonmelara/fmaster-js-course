@@ -1,3 +1,6 @@
+// Importa el conjunto de datos de las fotos desde un archivo externo.
+import dataFotos from "./datos/fotos";
+
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
 const contenedorCategorias = document.getElementById("categorias");
 // Se obtiene el elemento que representa la galería del DOM y se almacena en la constante galeria.
@@ -14,5 +17,29 @@ contenedorCategorias.addEventListener("click", (e) => {
     galeria.classList.add("galeria--active");
     // Se establece el estilo de overflow del cuerpo del documento a "hidden" para evitar el desplazamiento del fondo.
     document.body.style.overflow = "hidden";
+
+    // Se obtiene el identificador de la categoría desde el atributo de datos del enlace clickeado.
+    const categoriaActiva = e.target.dataset.categoria;
+    // Se recuperan las fotos correspondientes a la categoría activa de los datos importados.
+    const fotos = dataFotos.fotos[categoriaActiva];
+
+    // Por cada foto en la categoría, se crea un elemento de carrusel y se añade al HTML de la galería.
+    fotos.forEach((foto) => {
+      const slide = `
+    <a href="#" class="galeria__carousel-slide">
+      <img
+      class="galeria__carousel-image"
+      src="${foto.ruta}"
+      alt="" />
+    </a>
+    `;
+      // Se añade el slide al contenedor de slides del carrusel en la galería.
+      galeria.querySelector(".galeria__carousel-slides").innerHTML += slide;
+    });
+
+    // Se añade una clase para activar visualmente el primer slide del carrusel.
+    galeria
+      .querySelector(".galeria__carousel-slide")
+      .classList.add("galeria__carousel-slide--active");
   }
 });
