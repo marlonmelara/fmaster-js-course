@@ -1,3 +1,18 @@
+/**
+ * Este archivo define un módulo de exportación que contiene un objeto con datos de fotos organizados por regiones geográficas.
+ * En este caso, se proporciona un ejemplo con un conjunto de fotos de la región de América.
+ *
+ * La estructura del objeto es la siguiente:
+ * - `fotos` es un objeto que actúa como un mapa donde cada clave corresponde a un nombre de región.
+ * - Cada región tiene un arreglo de objetos, donde cada objeto representa una foto individual con su metadata.
+ *
+ * Cada objeto de foto tiene las siguientes propiedades:
+ * - `id`: Un número único que identifica la foto dentro de su región.
+ * - `nombre`: El nombre o título de la foto.
+ * - `descripcion`: Una descripción detallada de la foto, que puede contener información adicional como el contexto o la ubicación donde se tomó la foto.
+ * - `ruta`: La ruta relativa al archivo de imagen correspondiente a la foto.
+ */
+
 export default {
   fotos: {
     america: [

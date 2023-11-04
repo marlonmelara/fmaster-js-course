@@ -1,3 +1,14 @@
+/**
+ * Este módulo importa datos de fotos desde el archivo "fotos.js" y utiliza esta información para
+ * exportar un objeto predeterminado que contiene un arreglo de categorías.
+ *
+ * Cada categoría es un objeto con las siguientes propiedades:
+ * - `id`: Un identificador único para la categoría, que se utiliza también como clave en el objeto importado de fotos.
+ * - `nombre`: El nombre legible de la categoría, que se muestra en la interfaz de usuario.
+ * - `numeroFotos`: Un número que indica cuántas fotos pertenecen a esta categoría. Se calcula accediendo a la propiedad correspondiente en el objeto de fotos importado y contando la longitud del arreglo.
+ * - `imagenPortada`: La ruta relativa al archivo de imagen que se utilizará como portada para la categoría.
+ */
+
 import data from "./fotos";
 const { fotos } = data;
 
