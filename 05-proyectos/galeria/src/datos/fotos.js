@@ -1,7 +1,5 @@
 /**
  * Este archivo define un módulo de exportación que contiene un objeto con datos de fotos organizados por regiones geográficas.
- * En este caso, se proporciona un ejemplo con un conjunto de fotos de la región de América.
- *
  * La estructura del objeto es la siguiente:
  * - `fotos` es un objeto que actúa como un mapa donde cada clave corresponde a un nombre de región.
  * - Cada región tiene un arreglo de objetos, donde cada objeto representa una foto individual con su metadata.

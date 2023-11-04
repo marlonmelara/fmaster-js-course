@@ -10,7 +10,7 @@
  */
 
 import data from "./fotos";
-const { fotos } = data;
+const { fotos } = data; // Es una forma abreviadad y más legible de "const fotos = data.fotos;"
 
 export default {
   categorias: [
