@@ -1,5 +1,18 @@
 'use strict';
 
+/**
+ * Este archivo define un módulo de exportación que contiene un objeto con datos de fotos organizados por regiones geográficas.
+ * La estructura del objeto es la siguiente:
+ * - `fotos` es un objeto que actúa como un mapa donde cada clave corresponde a un nombre de región.
+ * - Cada región tiene un arreglo de objetos, donde cada objeto representa una foto individual con su metadata.
+ *
+ * Cada objeto de foto tiene las siguientes propiedades:
+ * - `id`: Un número único que identifica la foto dentro de su región.
+ * - `nombre`: El nombre o título de la foto.
+ * - `descripcion`: Una descripción detallada de la foto, que puede contener información adicional como el contexto o la ubicación donde se tomó la foto.
+ * - `ruta`: La ruta relativa al archivo de imagen correspondiente a la foto.
+ */
+
 var dataFotos = {
   fotos: {
     america: [
@@ -431,7 +444,18 @@ var dataFotos = {
   },
 };
 
-const { fotos } = dataFotos;
+/**
+ * Este módulo importa datos de fotos desde el archivo "fotos.js" y utiliza esta información para
+ * exportar un objeto predeterminado que contiene un arreglo de categorías.
+ *
+ * Cada categoría es un objeto con las siguientes propiedades:
+ * - `id`: Un identificador único para la categoría, que se utiliza también como clave en el objeto importado de fotos.
+ * - `nombre`: El nombre legible de la categoría, que se muestra en la interfaz de usuario.
+ * - `numeroFotos`: Un número que indica cuántas fotos pertenecen a esta categoría. Se calcula accediendo a la propiedad correspondiente en el objeto de fotos importado y contando la longitud del arreglo.
+ * - `imagenPortada`: La ruta relativa al archivo de imagen que se utilizará como portada para la categoría.
+ */
+
+const { fotos } = dataFotos; // Es una forma abreviadad y más legible de "const fotos = data.fotos;"
 
 var dataCategorias = {
   categorias: [
@@ -516,7 +540,7 @@ categorias.forEach((categoria) => {
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
 const contenedorCategorias = document.getElementById("categorias");
 // Se obtiene el elemento que representa la galería del DOM y se almacena en la constante galeria.
-const galeria = document.getElementById("galeria");
+const galeria$2 = document.getElementById("galeria");
 
 // Se añade un listener de evento de clic al contenedor de categorías.
 contenedorCategorias.addEventListener("click", (e) => {
@@ -526,7 +550,7 @@ contenedorCategorias.addEventListener("click", (e) => {
   // Se verifica si el clic ocurrió dentro de un enlace (elemento <a>) utilizando el método closest.
   if (e.target.closest("a")) {
     // Si el clic fue dentro de un enlace, se añade la clase 'galeria--active' al elemento galeria.
-    galeria.classList.add("galeria--active");
+    galeria$2.classList.add("galeria--active");
     // Se establece el estilo de overflow del cuerpo del documento a "hidden" para evitar el desplazamiento del fondo.
     document.body.style.overflow = "hidden";
 
@@ -546,12 +570,46 @@ contenedorCategorias.addEventListener("click", (e) => {
     </a>
     `;
       // Se añade el slide al contenedor de slides del carrusel en la galería.
-      galeria.querySelector(".galeria__carousel-slides").innerHTML += slide;
+      galeria$2.querySelector(".galeria__carousel-slides").innerHTML += slide;
     });
 
     // Se añade una clase para activar visualmente el primer slide del carrusel.
-    galeria
+    galeria$2
       .querySelector(".galeria__carousel-slide")
       .classList.add("galeria__carousel-slide--active");
+  }
+});
+
+// Obtener el elemento del DOM con el id 'galeria'.
+const galeria$1 = document.getElementById("galeria");
+
+// Definir la función 'cerrarGaleria'.
+const cerrarGaleria = () => {
+  // Remover la clase 'galeria--active' del elemento 'galeria'.
+  // Esto probablemente haga que la galería se oculte o cambie su estilo a no activo.
+  galeria$1.classList.remove("galeria--active");
+
+  // Restablecer el estilo 'overflow' del cuerpo del documento a su valor por defecto.
+  // Esto permite que la página vuelva a desplazarse si se había deshabilitado anteriormente.
+  document.body.style.overflow = "";
+};
+
+// Importar la función 'cerrarGaleria' desde el módulo 'cerrarGaleria'.
+
+// Obtener el elemento del DOM con el id 'galeria'.
+const galeria = document.getElementById("galeria");
+
+// Añadir un manejador de eventos de tipo 'click' al elemento 'galeria'.
+galeria.addEventListener("click", (e) => {
+  // Intentar encontrar el elemento 'button' más cercano al lugar donde ocurrió el evento 'click'.
+  // Esto es útil si hay varios botones o elementos interactivos dentro de la galería y se quiere
+  // asegurar de reaccionar solo al botón correcto.
+  const boton = e.target.closest("button");
+
+  // Comprobar si el botón existe y tiene un atributo de 'data-accion' con el valor 'cerrar-galeria'.
+  // El operador opcional '?' asegura que no se produzca un error si 'boton' es null o undefined.
+  if (boton?.dataset?.accion === "cerrar-galeria") {
+    // Si la condición se cumple, se llama a la función 'cerrarGaleria' importada anteriormente.
+    cerrarGaleria();
   }
 });
