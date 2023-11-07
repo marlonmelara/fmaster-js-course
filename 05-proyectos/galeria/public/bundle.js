@@ -555,9 +555,14 @@ contenedorCategorias.addEventListener("click", (e) => {
     document.body.style.overflow = "hidden";
 
     // Se obtiene el identificador de la categoría desde el atributo de datos del enlace clickeado.
-    const categoriaActiva = e.target.dataset.categoria;
+    const categoriaActiva = e.target.closest("a").dataset.categoria;
     // Se recuperan las fotos correspondientes a la categoría activa de los datos importados.
     const fotos = dataFotos.fotos[categoriaActiva];
+
+    // Se obtiene el contenedor de slides del carrusel en la galería.
+    const carousel = galeria$2.querySelector(".galeria__carousel-slides");
+    // Se limpia el contenido actual del carrusel.
+    carousel.innerHTML = "";
 
     // Por cada foto en la categoría, se crea un elemento de carrusel y se añade al HTML de la galería.
     fotos.forEach((foto) => {
