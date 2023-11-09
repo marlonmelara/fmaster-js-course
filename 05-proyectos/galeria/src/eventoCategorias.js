@@ -20,6 +20,9 @@ contenedorCategorias.addEventListener("click", (e) => {
 
     // Se obtiene el identificador de la categoría desde el atributo de datos del enlace clickeado.
     const categoriaActiva = e.target.closest("a").dataset.categoria;
+
+    galeria.dataset.categoria = categoriaActiva;
+
     // Se recuperan las fotos correspondientes a la categoría activa de los datos importados.
     const fotos = dataFotos.fotos[categoriaActiva];
 
@@ -38,6 +41,7 @@ contenedorCategorias.addEventListener("click", (e) => {
       <img
       class="galeria__carousel-image"
       src="${foto.ruta}"
+      data-id="${foto.id}"
       alt="" />
     </a>
     `;

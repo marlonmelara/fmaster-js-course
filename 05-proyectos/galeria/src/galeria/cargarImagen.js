@@ -1,3 +1,5 @@
+import data from "../datos/fotos";
+
 // Selecciona el elemento de la galería en el DOM por su ID.
 const galeria = document.getElementById("galeria");
 
@@ -19,6 +21,28 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
   // Actualiza el texto de la descripción de la imagen activa con la descripción proporcionada.
   galeria.querySelector(".galeria__descripcion-imagen-activa").innerText =
     descripcion;
+
+  const categoriaActual = galeria.dataset.categoria;
+  const fotos = data.fotos[categoriaActual];
+
+  let indexImagenActual;
+  fotos.forEach((foto, index) => {
+    if (foto.id === id) {
+      indexImagenActual = index;
+    }
+  });
+
+  // Marcamos la imagen del carousel como activa.
+  if (galeria.querySelectorAll(".galeria__carousel-slide").length > 0) {
+    // Eliminamos la clase active del cualquier slide.
+    galeria
+      .querySelector(".galeria__carousel-slide--active")
+      .classList.remove("galeria__carousel-slide--active");
+
+    galeria
+      .querySelectorAll(".galeria__carousel-slide")
+      [indexImagenActual].classList.add("galeria__carousel-slide--active");
+  }
 };
 
 // Exporta la función cargarImagen para que pueda ser utilizada en otros módulos.

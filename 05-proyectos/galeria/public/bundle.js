@@ -13,7 +13,7 @@
  * - `ruta`: La ruta relativa al archivo de imagen correspondiente a la foto.
  */
 
-var dataFotos = {
+var datos = {
   fotos: {
     america: [
       {
@@ -455,7 +455,7 @@ var dataFotos = {
  * - `imagenPortada`: La ruta relativa al archivo de imagen que se utilizará como portada para la categoría.
  */
 
-const { fotos } = dataFotos; // Es una forma abreviadad y más legible de "const fotos = data.fotos;"
+const { fotos } = datos; // Es una forma abreviadad y más legible de "const fotos = data.fotos;"
 
 var dataCategorias = {
   categorias: [
@@ -556,6 +556,28 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
   // Actualiza el texto de la descripción de la imagen activa con la descripción proporcionada.
   galeria$3.querySelector(".galeria__descripcion-imagen-activa").innerText =
     descripcion;
+
+  const categoriaActual = galeria$3.dataset.categoria;
+  const fotos = datos.fotos[categoriaActual];
+
+  let indexImagenActual;
+  fotos.forEach((foto, index) => {
+    if (foto.id === id) {
+      indexImagenActual = index;
+    }
+  });
+
+  // Marcamos la imagen del carousel como activa.
+  if (galeria$3.querySelectorAll(".galeria__carousel-slide").length > 0) {
+    // Eliminamos la clase active del cualquier slide.
+    galeria$3
+      .querySelector(".galeria__carousel-slide--active")
+      .classList.remove("galeria__carousel-slide--active");
+
+    galeria$3
+      .querySelectorAll(".galeria__carousel-slide")
+      [indexImagenActual].classList.add("galeria__carousel-slide--active");
+  }
 };
 
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
@@ -577,8 +599,11 @@ contenedorCategorias.addEventListener("click", (e) => {
 
     // Se obtiene el identificador de la categoría desde el atributo de datos del enlace clickeado.
     const categoriaActiva = e.target.closest("a").dataset.categoria;
+
+    galeria$2.dataset.categoria = categoriaActiva;
+
     // Se recuperan las fotos correspondientes a la categoría activa de los datos importados.
-    const fotos = dataFotos.fotos[categoriaActiva];
+    const fotos = datos.fotos[categoriaActiva];
 
     // Se obtiene el contenedor de slides del carrusel en la galería.
     const carousel = galeria$2.querySelector(".galeria__carousel-slides");
@@ -595,6 +620,7 @@ contenedorCategorias.addEventListener("click", (e) => {
       <img
       class="galeria__carousel-image"
       src="${foto.ruta}"
+      data-id="${foto.id}"
       alt="" />
     </a>
     `;
@@ -623,7 +649,39 @@ const cerrarGaleria = () => {
   document.body.style.overflow = "";
 };
 
-// Importar la función 'cerrarGaleria' desde el módulo 'cerrarGaleria'.
+// Importar el módulo de datos de fotos y la función cargarImagen de sus respectivos archivos.
+
+/**
+ * Manejador del evento de clic para una diapositiva de la galería.
+ *
+ * @param {Event} e - El objeto evento que se dispara cuando se hace clic en una diapositiva.
+ */
+const slideClick = (e) => {
+  // Inicializar variables para la ruta, el nombre y la descripción de la imagen.
+  let ruta, nombre, descripcion;
+
+  // Obtener el ID de la imagen a partir del atributo de datos del elemento clickeado y convertirlo a un número entero.
+  const id = parseInt(e.target.dataset.id);
+
+  // Seleccionar el elemento de la galería en el DOM por su ID.
+  const galeria = document.getElementById("galeria");
+
+  // Obtener la categoría activa de los datos de la galería.
+  const categoriaActiva = galeria.dataset.categoria;
+
+  // Iterar sobre el arreglo de fotos de la categoría activa para encontrar la foto correspondiente al ID.
+  datos.fotos[categoriaActiva].forEach((foto) => {
+    if (foto.id === id) {
+      // Si se encuentra la foto con el ID correspondiente, asignar su ruta, nombre y descripción a las variables.
+      ruta = foto.ruta;
+      nombre = foto.nombre;
+      descripcion = foto.descripcion;
+    }
+  });
+
+  // Llamar a la función cargarImagen con los detalles de la foto seleccionada para actualizar la galería.
+  cargarImagen(id, nombre, ruta, descripcion);
+};
 
 // Obtener el elemento del DOM con el id 'galeria'.
 const galeria = document.getElementById("galeria");
@@ -637,8 +695,14 @@ galeria.addEventListener("click", (e) => {
 
   // Comprobar si el botón existe y tiene un atributo de 'data-accion' con el valor 'cerrar-galeria'.
   // El operador opcional '?' asegura que no se produzca un error si 'boton' es null o undefined.
+  // - - - CERRAR GALERIA
   if (boton?.dataset?.accion === "cerrar-galeria") {
     // Si la condición se cumple, se llama a la función 'cerrarGaleria' importada anteriormente.
     cerrarGaleria();
+  }
+
+  // - - - CAROUSEL SLIDE CLICK
+  if (e.target.dataset.id) {
+    slideClick(e);
   }
 });
