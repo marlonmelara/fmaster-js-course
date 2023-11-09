@@ -1,5 +1,5 @@
-// Importa el conjunto de datos de las fotos desde un archivo externo.
 import dataFotos from "./datos/fotos";
+import { cargarImagen } from "./galeria/cargarImagen";
 
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
 const contenedorCategorias = document.getElementById("categorias");
@@ -27,6 +27,9 @@ contenedorCategorias.addEventListener("click", (e) => {
     const carousel = galeria.querySelector(".galeria__carousel-slides");
     // Se limpia el contenido actual del carrusel.
     carousel.innerHTML = "";
+
+    const { id, nombre, ruta, descripcion } = fotos[0];
+    cargarImagen(id, nombre, ruta, descripcion);
 
     // Por cada foto en la categoría, se crea un elemento de carrusel y se añade al HTML de la galería.
     fotos.forEach((foto) => {

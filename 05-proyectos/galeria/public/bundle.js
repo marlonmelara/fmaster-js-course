@@ -535,7 +535,28 @@ categorias.forEach((categoria) => {
   contenedorCategorias$1.append(nuevaCategoria);
 });
 
-// Importa el conjunto de datos de las fotos desde un archivo externo.
+// Selecciona el elemento de la galería en el DOM por su ID.
+const galeria$3 = document.getElementById("galeria");
+
+/**
+ * Función para cargar una imagen y su información en la galería.
+ *
+ * @param {number} id - El ID único de la imagen.
+ * @param {string} nombre - El nombre de la imagen.
+ * @param {string} ruta - La ruta de archivo de la imagen.
+ * @param {string} descripcion - La descripción de la imagen.
+ */
+const cargarImagen = (id, nombre, ruta, descripcion) => {
+  // Establece el atributo 'src' del elemento de imagen de la galería con la ruta proporcionada.
+  galeria$3.querySelector(".galeria__imagen").src = ruta;
+  // Establece un atributo de dato personalizado 'data-id-imagen' con el ID de la imagen.
+  galeria$3.querySelector(".galeria__imagen").dataset.idImagen = id;
+  // Actualiza el texto del título de la galería con el nombre proporcionado.
+  galeria$3.querySelector(".galeria__titulo").innerText = nombre;
+  // Actualiza el texto de la descripción de la imagen activa con la descripción proporcionada.
+  galeria$3.querySelector(".galeria__descripcion-imagen-activa").innerText =
+    descripcion;
+};
 
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
 const contenedorCategorias = document.getElementById("categorias");
@@ -563,6 +584,9 @@ contenedorCategorias.addEventListener("click", (e) => {
     const carousel = galeria$2.querySelector(".galeria__carousel-slides");
     // Se limpia el contenido actual del carrusel.
     carousel.innerHTML = "";
+
+    const { id, nombre, ruta, descripcion } = fotos[0];
+    cargarImagen(id, nombre, ruta, descripcion);
 
     // Por cada foto en la categoría, se crea un elemento de carrusel y se añade al HTML de la galería.
     fotos.forEach((foto) => {
