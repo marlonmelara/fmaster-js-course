@@ -580,6 +580,34 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
   }
 };
 
+// Funcionalidad de cargar imagen anterior y siguiente
+const cargarAnteriorSiguiente = (direccion) => {
+  const categoriaActual = galeria$3.dataset.categoria;
+  const fotos = datos.fotos[categoriaActual];
+  const idImagenActual = parseInt(
+    galeria$3.querySelector(".galeria__imagen").dataset.idImagen
+  );
+
+  let indexImagenActual;
+  fotos.forEach((foto, index) => {
+    if (foto.id === idImagenActual) {
+      indexImagenActual = index;
+    }
+  });
+
+  if (direccion === "siguiente") {
+    if (fotos[indexImagenActual + 1]) {
+      const { id, nombre, ruta, descripcion } = fotos[indexImagenActual + 1];
+      cargarImagen(id, nombre, ruta, descripcion);
+    }
+  } else if (direccion === "anterior") {
+    if (fotos[indexImagenActual - 1]) {
+      const { id, nombre, ruta, descripcion } = fotos[indexImagenActual - 1];
+      cargarImagen(id, nombre, ruta, descripcion);
+    }
+  }
+};
+
 // Se obtiene el contenedor de las categorías del DOM y se almacena en la constante contenedorCategorias.
 const contenedorCategorias = document.getElementById("categorias");
 // Se obtiene el elemento que representa la galería del DOM y se almacena en la constante galeria.
@@ -695,6 +723,7 @@ galeria.addEventListener("click", (e) => {
 
   // Comprobar si el botón existe y tiene un atributo de 'data-accion' con el valor 'cerrar-galeria'.
   // El operador opcional '?' asegura que no se produzca un error si 'boton' es null o undefined.
+
   // - - - CERRAR GALERIA
   if (boton?.dataset?.accion === "cerrar-galeria") {
     // Si la condición se cumple, se llama a la función 'cerrarGaleria' importada anteriormente.
@@ -704,5 +733,15 @@ galeria.addEventListener("click", (e) => {
   // - - - CAROUSEL SLIDE CLICK
   if (e.target.dataset.id) {
     slideClick(e);
+  }
+
+  // - - - SIGUIENTE IMAGEN
+  if (boton?.dataset?.accion === "siguiente-imagen") {
+    cargarAnteriorSiguiente("siguiente");
+  }
+
+  // - - - ANTERIOR IMAGEN
+  if (boton?.dataset?.accion === "anterior-imagen") {
+    cargarAnteriorSiguiente("anterior");
   }
 });

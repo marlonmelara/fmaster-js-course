@@ -1,5 +1,6 @@
 import cerrarGaleria from "./cerrarGaleria";
 import slideClick from "./slideClick";
+import { cargarAnteriorSiguiente } from "./cargarImagen";
 
 // Obtener el elemento del DOM con el id 'galeria'.
 const galeria = document.getElementById("galeria");
@@ -13,6 +14,7 @@ galeria.addEventListener("click", (e) => {
 
   // Comprobar si el botón existe y tiene un atributo de 'data-accion' con el valor 'cerrar-galeria'.
   // El operador opcional '?' asegura que no se produzca un error si 'boton' es null o undefined.
+
   // - - - CERRAR GALERIA
   if (boton?.dataset?.accion === "cerrar-galeria") {
     // Si la condición se cumple, se llama a la función 'cerrarGaleria' importada anteriormente.
@@ -22,5 +24,15 @@ galeria.addEventListener("click", (e) => {
   // - - - CAROUSEL SLIDE CLICK
   if (e.target.dataset.id) {
     slideClick(e);
+  }
+
+  // - - - SIGUIENTE IMAGEN
+  if (boton?.dataset?.accion === "siguiente-imagen") {
+    cargarAnteriorSiguiente("siguiente");
+  }
+
+  // - - - ANTERIOR IMAGEN
+  if (boton?.dataset?.accion === "anterior-imagen") {
+    cargarAnteriorSiguiente("anterior");
   }
 });
