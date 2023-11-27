@@ -711,6 +711,11 @@ const slideClick = (e) => {
   cargarImagen(id, nombre, ruta, descripcion);
 };
 
+// Creación de función carousel
+const carousel = (direction) => {
+  console.log(direction);
+};
+
 // Obtener el elemento del DOM con el id 'galeria'.
 const galeria = document.getElementById("galeria");
 
@@ -743,5 +748,15 @@ galeria.addEventListener("click", (e) => {
   // - - - ANTERIOR IMAGEN
   if (boton?.dataset?.accion === "anterior-imagen") {
     cargarAnteriorSiguiente("anterior");
+  }
+
+  // - - - CAROUSEL ADELANTE
+  if (boton?.dataset?.accion === "siguiente-slide") {
+    carousel("Adelante");
+  }
+
+  // - - - CAROUSEL ATRAS
+  if (boton?.dataset?.accion === "anterior-slide") {
+    carousel("Atras");
   }
 });
